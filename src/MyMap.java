@@ -12,37 +12,55 @@ public class MyMap<K extends Comparable<K>, V> {
         MyNode<K, V> newNode = new MyNode<>(key, value);
         if (root == null) root = newNode;
         else {
-            int i = key.compareTo(root.key);
+            MyNode<K, V> curr = root;
+            int i = key.compareTo(curr.key);
             if (i < 0) {
-                root.left = newNode;
+                if (curr.left == null)  {
+                    curr.left = newNode;
+                } else {
+                    int j = key.compareTo(curr.left.key);
+                    if (j < 0) {
+                        curr.left.left = newNode;
+                    } else if (j > 0) {
+                        curr.left.right = newNode;
+                    } else {
+                        curr.value = value;
+                    }
+                }
             } else if (i > 0) {
-                root.right = newNode;
+                curr.right = newNode;
             } else {
-                root.value = value;
+                curr.value = value;
             }
         }
     }
 
     boolean contains(K key) {
-        if (root == null) return false;
-        if (root.key.equals(key)) return true;
-        if (key.compareTo(root.key) < 0) {
-            if (root.left.key.equals(key)) return true;
-            return false;
+        MyNode<K, V> curr = root;
+        return containsFromNode(curr, key);
+    }
+
+    private boolean containsFromNode(MyNode<K, V> curr, K key) {
+        if (curr == null) return false;
+        if (curr.key.equals(key)) return true;
+        if (key.compareTo(curr.key) < 0) {
+            return containsFromNode(curr.left, key);
         } else {
-            if (root.right.key.equals(key)) return true;
-            return false;
+            return containsFromNode(curr.right, key);
         }
     }
 
     V get(K key) {
-        if (root == null) return null;
-        if (root.key.equals(key)) return root.value;
-        if (key.compareTo(root.key) < 0) {
-            if (root.left.key.equals(key)) return root.left.value;
+        return getFromNode(root, key);
+    }
+
+    private V getFromNode(MyNode<K, V> curr, K key) {
+        if (curr == null) return null;
+        if (curr.key.equals(key)) return curr.value;
+        if (key.compareTo(curr.key) < 0) {
+            return getFromNode(curr.left, key);
         } else {
-            if (root.right.key.equals(key)) return root.right.value;
+            return getFromNode(curr.right, key);
         }
-        return null;
     }
 }
