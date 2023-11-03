@@ -9,45 +9,25 @@ public class MyMap<K extends Comparable<K>, V> {
     }
 
     void put(K key, V value) {
-        MyNode<K, V> newNode = new MyNode<>(key, value);
-        if (root == null) root = newNode;
-        else {
-            MyNode<K, V> curr = root;
-            int i = key.compareTo(curr.key);
-            if (i < 0) {
-                if (curr.left == null)  {
-                    curr.left = newNode;
-                } else {
-                    int j = key.compareTo(curr.left.key);
-                    if (j < 0) {
-                        curr.left.left = newNode;
-                    } else if (j > 0) {
-                        curr.left.right = newNode;
-                    } else {
-                        curr.value = value;
-                    }
-                }
-            } else if (i > 0) {
-                curr.right = newNode;
-            } else {
-                curr.value = value;
-            }
+        root = putUnderNode(key, value, root);
+    }
+
+    private MyNode<K, V> putUnderNode(K key, V value, MyNode<K, V> curr) {
+        if (curr == null) return new MyNode<>(key, value);
+        int i = key.compareTo(curr.key);
+        if (i < 0) {
+            curr.left = putUnderNode(key, value, curr.left);
+        } else if (i > 0) {
+            curr.right = putUnderNode(key, value, curr.right);
+        } else {
+            curr.value = value;
         }
+        return curr;
     }
 
     boolean contains(K key) {
-        MyNode<K, V> curr = root;
-        return containsFromNode(curr, key);
-    }
-
-    private boolean containsFromNode(MyNode<K, V> curr, K key) {
-        if (curr == null) return false;
-        if (curr.key.equals(key)) return true;
-        if (key.compareTo(curr.key) < 0) {
-            return containsFromNode(curr.left, key);
-        } else {
-            return containsFromNode(curr.right, key);
-        }
+        if (root == null) return false;
+        return root.contains(key);
     }
 
     V get(K key) {
