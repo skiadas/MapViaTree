@@ -1,7 +1,8 @@
+import java.util.Optional;
 import java.util.function.BiConsumer;
 
 public class MyMap<K extends Comparable<K>, V> {
-    MyNode<K, V> root = new EmptyNode<>();
+    MyNode<K, V> root =  EmptyNode.empty;
     int size() {
         return root.size();
     }
@@ -14,8 +15,8 @@ public class MyMap<K extends Comparable<K>, V> {
         return root.contains(key);
     }
 
-    V get(K key) {
-        return root.getFromNode(key);
+    Optional<V> get(K key) {
+        return root.get(key);
     }
 
     void forEach(BiConsumer<K, V> f) {

@@ -1,10 +1,11 @@
+import java.util.Optional;
 import java.util.function.BiConsumer;
 
 public class ActualNode<K extends Comparable<K>, V> implements MyNode<K, V> {
     final K key;
     V value;
-    MyNode<K, V> left = new EmptyNode<>();
-    MyNode<K, V> right = new EmptyNode<>();
+    MyNode<K, V> left = EmptyNode.empty;
+    MyNode<K, V> right =  EmptyNode.empty;
 
     public ActualNode(K key, V value) {
         this.key = key;
@@ -32,12 +33,12 @@ public class ActualNode<K extends Comparable<K>, V> implements MyNode<K, V> {
         }
     }
 
-    public V getFromNode(K key) {
-        if (this.key.equals(key)) return this.value;
+    public Optional<V> get(K key) {
+        if (this.key.equals(key)) return Optional.of(this.value);
         if (key.compareTo(this.key) < 0) {
-            return this.left.getFromNode(key);
+            return this.left.get(key);
         } else {
-            return this.right.getFromNode(key);
+            return this.right.get(key);
         }
     }
 
