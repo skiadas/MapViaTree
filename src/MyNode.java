@@ -45,4 +45,10 @@ public class MyNode<K extends Comparable<K>, V> {
         }
     }
 
+    int size() {
+        int count = 1;
+        if (this.left != null) count += this.left.size();
+        if (this.right != null) count += this.right.size();
+        return count;
+    }
 }

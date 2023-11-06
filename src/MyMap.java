@@ -1,11 +1,8 @@
 public class MyMap<K extends Comparable<K>, V> {
     MyNode<K, V> root = null;
     int size() {
-        int count = 0;
         if (root == null) return 0;
-        if (root.left != null) count += 1;
-        if (root.right != null) count += 1;
-        return count + 1;
+        return root.size();
     }
 
     void put(K key, V value) {

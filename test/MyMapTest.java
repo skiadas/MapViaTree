@@ -71,7 +71,7 @@ class MyMapTest {
         assertEquals(20, map.get("B"));
         assertEquals(30, map.get("A"));
         assertEquals(null, map.get("E"));
-        assertEquals(2, map.size());
+        assertEquals(3, map.size());
     }
 
 }
