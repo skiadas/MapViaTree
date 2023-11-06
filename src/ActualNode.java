@@ -1,3 +1,5 @@
+import java.util.function.BiConsumer;
+
 public class ActualNode<K extends Comparable<K>, V> implements MyNode<K, V> {
     final K key;
     V value;
@@ -41,5 +43,16 @@ public class ActualNode<K extends Comparable<K>, V> implements MyNode<K, V> {
 
     public int size() {
         return this.left.size() + this.right.size() + 1;
+    }
+
+    // Tree traversals:
+    // in-order    left - node - right
+    // pre-order   node - left - right
+    // post-order  left - right - node
+
+    public void forEach(BiConsumer<K, V> f) {
+        this.left.forEach(f);
+        f.accept(key, value);
+        this.right.forEach(f);
     }
 }

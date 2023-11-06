@@ -72,6 +72,9 @@ class MyMapTest {
         assertEquals(30, map.get("A"));
         assertEquals(null, map.get("E"));
         assertEquals(3, map.size());
+        map.forEach( (k, v) -> {
+            System.out.println(k + v);
+        });
     }
 
 }
