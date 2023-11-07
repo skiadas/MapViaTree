@@ -51,7 +51,7 @@ public class ActualNode<K extends Comparable<K>, V> implements MyNode<K, V> {
     // pre-order   node - left - right
     // post-order  left - right - node
 
-    public void forEach(BiConsumer<K, V> f) {
+    public void forEach(BiConsumer<? super K, ? super V> f) {
         this.left.forEach(f);
         f.accept(key, value);
         this.right.forEach(f);

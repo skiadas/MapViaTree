@@ -6,5 +6,5 @@ public interface MyNode<K extends Comparable<K>, V> {
     boolean contains(K key);
     Optional<V> get(K key);
     int size();
-    void forEach(BiConsumer<K, V> f);
+    void forEach(BiConsumer<? super K, ? super V> f);
 }

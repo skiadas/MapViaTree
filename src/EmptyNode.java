@@ -28,7 +28,7 @@ public class EmptyNode<K extends Comparable<K>, V> implements MyNode<K, V> {
         return 0;
     }
 
-    public void forEach(BiConsumer<K, V> f) {
+    public void forEach(BiConsumer<? super K, ? super V> f) {
 
     }
 }
