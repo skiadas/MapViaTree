@@ -4,8 +4,8 @@ import java.util.function.BiConsumer;
 public class ActualNode<K extends Comparable<K>, V> implements MyNode<K, V> {
     final K key;
     V value;
-    MyNode<K, V> left = EmptyNode.empty;
-    MyNode<K, V> right =  EmptyNode.empty;
+    MyNode<K, V> left = EmptyNode.getInstance();
+    MyNode<K, V> right =  EmptyNode.getInstance();
 
     public ActualNode(K key, V value) {
         this.key = key;

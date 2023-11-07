@@ -2,7 +2,11 @@ import java.util.Optional;
 import java.util.function.BiConsumer;
 
 public class EmptyNode<K extends Comparable<K>, V> implements MyNode<K, V> {
-    static EmptyNode empty = new EmptyNode<>();
+    private final static EmptyNode<?, ?> instance = new EmptyNode<>();
+    @SuppressWarnings("unchecked")
+    static <K extends Comparable<K>, V> MyNode<K, V> getInstance() {
+        return (MyNode<K, V>) instance;
+    }
     // singleton pattern
     private EmptyNode() {
         System.out.println("Making empty");

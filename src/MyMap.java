@@ -2,7 +2,7 @@ import java.util.Optional;
 import java.util.function.BiConsumer;
 
 public class MyMap<K extends Comparable<K>, V> {
-    MyNode<K, V> root =  EmptyNode.empty;
+    MyNode<K, V> root =  EmptyNode.getInstance();
     int size() {
         return root.size();
     }
